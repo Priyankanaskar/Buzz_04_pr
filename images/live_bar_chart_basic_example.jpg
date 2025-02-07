@@ -1,0 +1,29 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import time
+
+# Initialize the plot
+plt.ion()
+fig, ax = plt.subplots()
+
+# Initial data
+categories = ['A', 'B', 'C', 'D']
+values = [5, 7, 3, 8]
+
+bars = ax.bar(categories, values)
+
+# Function to update the bar chart
+def update_bars(values):
+    for bar, value in zip(bars, values):
+        bar.set_height(value)
+    fig.canvas.draw()
+    fig.canvas.flush_events()
+
+# Simulate live data update
+for _ in range(100):
+    values = np.random.randint(1, 10, size=4)
+    update_bars(values)
+    time.sleep(0.5)
+
+plt.ioff()
+plt.show()
